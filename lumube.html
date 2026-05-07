@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>橹穆BE倒计时</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        body {
+            background-color: #990000; /* 更深的红，更有破碎感 */
+            color: #000;
+            font-family: "黑体", "Arial Black", sans-serif;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            overflow: hidden;
+        }
+        /* 文字通用样式：粗黑+白边，和原图效果一致 */
+        .big-text {
+            font-size: clamp(2.5rem, 8vw, 5rem);
+            font-weight: 900;
+            text-shadow: -2px -2px 0 #fff, 2px -2px 0 #fff, -2px 2px 0 #fff, 2px 2px 0 #fff;
+            text-align: center;
+            line-height: 1.3;
+            margin: 0.1em 0;
+        }
+        .small-text {
+            font-size: clamp(1.1rem, 3vw, 1.8rem);
+            font-weight: bold;
+            text-shadow: -1px -1px 0 #fff, 1px -1px 0 #fff, -1px 1px 0 #fff, 1px 1px 0 #fff;
+            text-align: center;
+            margin: 1em 0;
+            opacity: 0.9;
+        }
+        .countdown {
+            font-size: clamp(3.5rem, 11vw, 7rem);
+            font-weight: 900;
+            text-shadow: -3px -3px 0 #fff, 3px -3px 0 #fff, -3px 3px 0 #fff, 3px 3px 0 #fff;
+            margin: 0.5em 0;
+        }
+        .footer {
+            position: fixed;
+            bottom: 20px;
+            color: #fff;
+            font-size: 1rem;
+            opacity: 0.7;
+        }
+        /* 点击效果：弹出BE文案 */
+        .pop-text {
+            position: absolute;
+            color: #fff;
+            font-size: 1.8rem;
+            font-weight: bold;
+            text-shadow: -1px -1px 0 #000, 1px -1px 0 #000, -1px 1px 0 #000, 1px 1px 0 #000;
+            pointer-events: none;
+            animation: pop 1.2s ease-out forwards;
+        }
+        @keyframes pop {
+            0% { opacity: 1; transform: translateY(0) scale(1); }
+            100% { opacity: 0; transform: translateY(-120px) scale(1.3); }
+        }
+    </style>
+</head>
+<body>
+    <div class="big-text">橹穆BE</div>
+    <div class="big-text">倒计时</div>
+    <div class="small-text">(点击屏幕，拾取破碎瞬间)</div>
+    <div class="countdown" id="timer">48:00:00</div>
+    <div class="footer">原来真的会有，连再见都没有的结局</div>
+
+    <script>
+        // 1. 倒计时功能（48小时）
+        let totalSeconds = 48 * 60 * 60;
+        const timerEl = document.getElementById('timer');
+
+        function updateTimer() {
+            if (totalSeconds <= 0) {
+                timerEl.textContent = "00:00:00";
+                return;
+            }
+            const hours = Math.floor(totalSeconds / 3600);
+            const minutes = Math.floor((totalSeconds % 3600) / 60);
+            const seconds = totalSeconds % 60;
+            timerEl.textContent = `${String(hours).padStart(2, '0')}:${String(minutes).padStart(2, '0')}:${String(seconds).padStart(2, '0')}`;
+            totalSeconds--;
+        }
+        updateTimer();
+        setInterval(updateTimer, 1000);
+
+        // 2. 点击屏幕弹出BE专属文案
+        const surpriseTexts = [
+            "故事停在了盛夏",
+            "再也没有双人舞台了",
+            "曾经的双人，变成了单人",
+            "我还是会等一个奇迹",
+            "风停了，我们也散了",
+            "他们的故事，结束了",
+            "原来BE才是常态",
+            "再也回不去了"
+        ];
+        document.body.addEventListener('click', (e) => {
+            const pop = document.createElement('div');
+            pop.className = 'pop-text';
+            pop.textContent = surpriseTexts[Math.floor(Math.random() * surpriseTexts.length)];
+            pop.style.left = e.clientX + 'px';
+            pop.style.top = e.clientY + 'px';
+            document.body.appendChild(pop);
+            setTimeout(() => pop.remove(), 1200);
+        });
+    </script>
+</body>
+</html>
