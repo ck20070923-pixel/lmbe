@@ -11,7 +11,7 @@
             box-sizing: border-box;
         }
         body {
-            background-color: #990000; /* 更深的红，更有破碎感 */
+            background-color: #990000; 
             color: #000;
             font-family: "黑体", "Arial Black", sans-serif;
             min-height: 100vh;
@@ -22,7 +22,7 @@
             cursor: pointer;
             overflow: hidden;
         }
-        /* 文字通用样式：粗黑+白边，和原图效果一致 */
+        
         .big-text {
             font-size: clamp(2.5rem, 8vw, 5rem);
             font-weight: 900;
@@ -52,7 +52,7 @@
             font-size: 1rem;
             opacity: 0.7;
         }
-        /* 点击效果：弹出BE文案 */
+
         .pop-text {
             position: absolute;
             color: #fff;
@@ -71,9 +71,9 @@
 <body>
     <div class="big-text">橹穆BE</div>
     <div class="big-text">倒计时</div>
-    <div class="small-text">(点击屏幕，拾取破碎瞬间)</div>
+    <div class="small-text">(bebebebebebe)</div>
     <div class="countdown" id="timer">48:00:00</div>
-    <div class="footer">原来真的会有，连再见都没有的结局</div>
+    <div class="footer">bebebebebebe</div>
 
     <script>
         // 1. 倒计时功能（48小时）
@@ -96,13 +96,13 @@
 
         // 2. 点击屏幕弹出BE专属文案
         const surpriseTexts = [
-            "故事停在了盛夏",
+            "是人类吗",
             "疑问吗",
-            "疑问吗",
-            "风停了，也散了",
-            "他们的故事，结束了",
-            "原来BE才是常态",
-            "再也回不去了"
+            "体面吗",
+            "哈哈哈哈哈哈",
+            "哈",
+            "哈哈哈哈",
+            "全都滚"
         ];
         document.body.addEventListener('click', (e) => {
             const pop = document.createElement('div');
